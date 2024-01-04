@@ -69,6 +69,20 @@ from fastapi import FastAPI, Response, status, HTTPException
 28 Postgres Windows Install
 29 Postgres Mac Install
 30 Database Schema & Tables
+
+```python
+
+datatype | postgres | python
+numeric | int, decimal, precision | int , float
+text | varchar, text | string
+bool | boolean | boolean
+sequence | array | list
+```
+
+- primary key
+- constraints : not null , unique
+-
+
 31 Managing Postgres with PgAdmin GUI
 32 Your first SQL Query
 33 Filter results with "where"
