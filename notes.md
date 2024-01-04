@@ -45,6 +45,22 @@ Delete      DELETE      /posts/:id  @app.delete("/posts/{id}")
 20 Retrieve One
 21 Path order Matters
 22 Changing response Status Codes
+
+```python
+from fastapi import FastAPI, Response, status, HTTPException
+
+# specify default status code for path operation
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
+
+
+        # response.status_code = status.HTTP_404_NOT_FOUND
+        # return {"data": f"not found : id = {id}"}
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Post not found : id = {id}"
+
+
+```
+
 23 Deleting
 24 Updating
 25 Automatic Documentation

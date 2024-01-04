@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status, HTTPException
 from fastapi.params import Body
 from typing import Optional
 from random import randrange
@@ -43,6 +43,12 @@ def get_post(id: int):  # convert to int and validate by fastapi
     print(f"get post by id= {id}")
 
     post = find_post(id)
+    if not post:
+        # response.status_code = status.HTTP_404_NOT_FOUND
+        # return {"data": f"not found : id = {id}"}
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Post not found : id = {id}"
+        )
 
     return {"data": post}
 
@@ -55,7 +61,7 @@ def create_post(payload: dict = Body(...)):  # take body, convert to a dict,
 
 
 # title : str, content : str
-@app.post("/posts")
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_post(post: Post):  #  convert to pandantic Post model
     post_dict = post.dict()  # convert pandantic model to dict
     post_dict["id"] = randrange(0, 1000000)
