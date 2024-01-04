@@ -81,3 +81,17 @@ def delete_post(id: int):
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND, detail=f"post not found , id = {id}"
     )
+
+
+@app.put("/posts/{id}", status_code=status.HTTP_202_ACCEPTED)
+def update_post(id: int, post: Post):
+    print(post)
+    post_dict = post.dict()
+    for index, current_post in enumerate(my_posts):
+        if id == current_post["id"]:
+            current_post["title"] = post_dict["title"]
+            current_post["content"] = post_dict["content"]
+            return {"data": current_post}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail=f" id not found : {id}"
+    )
