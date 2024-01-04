@@ -24,7 +24,21 @@ uvicorn main:app
 13 Intro toman
 14 HTTP Requests
 15 Schema Validation with Pydantic
-16 CRUD Operations
+
+### 16 CRUD Operations
+
+always plural: /posts
+put - all fields
+patch - the fields need to update
+
+```python
+Create      POST        /posts      @app.post("posts")
+Read        GET         /posts/:id  @app.get("/posts/{id}")
+            GET         /posts      @app.get("/posts")
+Update      PUT/PATCH   /posts/:id  @app.put("/posts/{id}")
+Delete      DELETE      /posts/:id  @app.delete("/posts/{id}")
+```
+
 17 Storing in Array
 18 Creating
 19 Postman Collections & saving requests
