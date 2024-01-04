@@ -68,3 +68,16 @@ def create_post(post: Post):  #  convert to pandantic Post model
     my_posts.append(post_dict)
 
     return {"data": post_dict}
+
+
+@app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_post(id: int):
+    for index, post in enumerate(my_posts):
+        print("===========post id", post["id"])
+        print("===========post id type", type(post["id"]))
+        if post["id"] == id:
+            my_posts.pop(index)
+            return Response(status_code=status.HTTP_204_NO_CONTENT)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail=f"post not found , id = {id}"
+    )
